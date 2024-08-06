@@ -97,9 +97,9 @@ function convertValue(){
     }
 
     if(firstSelectCurrency.value == 'dolar' && secondSelectCurrency.value == 'euro'){
-        currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('pt-BR', {
+        currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('de-DE', {
             style: 'currency',
-            currency: 'BRL'
+            currency: 'EUR'
         }).format(convertedDolarToEuro)
     }
 
@@ -111,9 +111,9 @@ function convertValue(){
     }
 
     if(firstSelectCurrency.value == 'euro' && secondSelectCurrency.value == 'dolar'){
-        currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('pt-BR', {
+        currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('en-US', {
             style: 'currency',
-            currency: 'BRL'
+            currency: 'USD'
         }).format(convertedEuroToDolar)
     }
 
