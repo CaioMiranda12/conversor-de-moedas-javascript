@@ -7,22 +7,18 @@ function convertValue(){
     const currencyValueToConvert = document.querySelector('.currency-value-to-convert')
     const currencyValue = document.querySelector('.currency-value')
 
-    const dolarValue = 5.2
-    const euroValue = 6.2
+    const taxaDolarReal = 5.2; // Taxa de câmbio do dólar para real
+    const taxaEuroReal = 6.2; // Taxa de câmbio do euro para real
 
-    const convertedRealToDolar = inputValue / dolarValue
-    const convertedRealToEuro = inputValue / euroValue
-    const convertedDolarToReal = inputValue * dolarValue
-    const convertedDolarToEuro = inputValue * euroValue
+    const convertedRealToDolar = inputValue / taxaDolarReal
+    const convertedRealToEuro = inputValue / taxaEuroReal
 
-    // currencyValueToConvert.innerHTML = currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', {
-    //     style: 'currency',
-    //     currency: 'BRL'
-    // }).format(inputValue)
+    const convertedDolarToReal = inputValue * taxaDolarReal
+    const convertedDolarToEuro = convertedDolarToReal / taxaEuroReal
 
-    // if(firstSelectCurrency.value == secondSelectCurrency.value){
-    //    second
-    // }
+    const convertedEuroToReal = inputValue * taxaEuroReal
+    const convertedEuroToDolar = convertedEuroToReal / taxaDolarReal
+
 
     // Se o select de CIMA for Dólar, cair aqui
     if(firstSelectCurrency.value == 'dolar'){
@@ -48,8 +44,36 @@ function convertValue(){
         }).format(inputValue)
     }
 
+
+    if(firstSelectCurrency.value == secondSelectCurrency.value){
+        if(secondSelectCurrency.value == 'dolar'){
+            currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(inputValue)
+        }
+    
+        // Se o select de BAIXO for Euro, cair aqui
+        if(secondSelectCurrency.value == 'euro'){
+            currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('de-DE', {
+                style: 'currency',
+                currency: 'EUR'
+            }).format(inputValue)
+        }
+    
+        // Se o select de BAIXO for Real, cair aqui
+        if(secondSelectCurrency.value == 'real'){
+            currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(inputValue)
+        }
+    }
+
+
+
     // Se o select de BAIXO for Dólar, cair aqui
-    if(secondSelectCurrency.value == 'dolar'){
+    if(firstSelectCurrency.value == 'real' && secondSelectCurrency.value == 'dolar'){
         currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD'
@@ -57,7 +81,7 @@ function convertValue(){
     }
 
     // Se o select de BAIXO for Euro, cair aqui
-    if(secondSelectCurrency.value == 'euro'){
+    if(firstSelectCurrency.value == 'real' && secondSelectCurrency.value == 'euro'){
         currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('de-DE', {
             style: 'currency',
             currency: 'EUR'
@@ -65,11 +89,32 @@ function convertValue(){
     }
 
     // Se o select de BAIXO for Real, cair aqui
-    if(secondSelectCurrency.value == 'real'){
+    if(firstSelectCurrency.value == 'dolar' && secondSelectCurrency.value == 'real'){
         currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
-        }).format(inputValue)
+        }).format(convertedDolarToReal)
+    }
+
+    if(firstSelectCurrency.value == 'dolar' && secondSelectCurrency.value == 'euro'){
+        currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(convertedDolarToEuro)
+    }
+
+    if(firstSelectCurrency.value == 'euro' && secondSelectCurrency.value == 'real'){
+        currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(convertedEuroToReal)
+    }
+
+    if(firstSelectCurrency.value == 'euro' && secondSelectCurrency.value == 'dolar'){
+        currencyValue.innerHTML = currencyValue.innerHTML = new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        }).format(convertedEuroToDolar)
     }
 
 }
